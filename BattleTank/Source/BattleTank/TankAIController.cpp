@@ -7,15 +7,26 @@
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
-	ATank* posessedTank = GetControlledTank();
-	if (posessedTank != nullptr)
+	PrimaryActorTick.bCanEverTick = true;
+
+	
+	
+}
+
+void ATankAIController::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	ATank* playerTank = GetPlayerTank();
+	if (playerTank != nullptr)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("AI controlled tank is %s"), *(posessedTank->GetName()))
+		GetControlledTank()->AimAt(playerTank->GetActorLocation());
 	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("AI couldn't find a tank"))
-	}
+}
+
+ATank * ATankAIController::GetPlayerTank() const
+{
+	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 }
 
 

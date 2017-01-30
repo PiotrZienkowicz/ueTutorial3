@@ -4,6 +4,11 @@
 #include "Tank.h"
 
 
+void ATank::AimAt(FVector hitLocation)
+{
+	UE_LOG(LogTemp, Warning, TEXT("%s aiming at: %s"), *(GetName()), *(hitLocation.ToString()))
+}
+
 // Sets default values
 ATank::ATank()
 {
@@ -16,7 +21,6 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Warning, TEXT("DZIALAM"))
 		
 }
 
