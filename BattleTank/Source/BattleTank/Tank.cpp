@@ -1,7 +1,9 @@
 #include "BattleTank.h"
+#include "TankAimingComponent.h"
+#include "TankBarrel.h"
 #include "Tank.h"
 
-void ATank::SetBarrelReference(UStaticMeshComponent* barrelToSet)
+void ATank::SetBarrelReference(UTankBarrel* barrelToSet)
 {
 	TankAimingComponent->SetBarrelReference(barrelToSet);
 }

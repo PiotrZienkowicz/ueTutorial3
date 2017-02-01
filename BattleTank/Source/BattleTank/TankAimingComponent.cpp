@@ -1,4 +1,5 @@
 #include "BattleTank.h"
+#include "TankBarrel.h"
 #include "TankAimingComponent.h"
 
 
@@ -7,7 +8,7 @@ UTankAimingComponent::UTankAimingComponent()
 
 }
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* barrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel* barrelToSet)
 {
 	barrel = barrelToSet;
 }
@@ -42,6 +43,7 @@ void UTankAimingComponent::MoveBarrel(FVector aimDirection)
 
 	FRotator deltaRotation = aimRotation - barrelRotation;
 
+	barrel->Elevate(5);
 
 
 	UE_LOG(LogTemp, Warning, TEXT("AimRotator: %s"), *(aimRotation.ToString()));
