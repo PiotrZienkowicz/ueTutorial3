@@ -5,7 +5,6 @@
 
 UTankAimingComponent::UTankAimingComponent()
 {
-
 }
 
 void UTankAimingComponent::SetBarrelReference(UTankBarrel* barrelToSet)
@@ -25,14 +24,18 @@ void UTankAimingComponent::AimAt(FVector hitLocation, float lunchSpeed)
 			startLocation,
 			hitLocation,
 			lunchSpeed,
+			false,
+			0,
+			0,
 			ESuggestProjVelocityTraceOption::DoNotTrace);
 
 		if (bAimSolution)
 		{
 			FVector aimDirection = outLunchVelocity.GetSafeNormal();
 			MoveBarrel(aimDirection);
-			UE_LOG(LogTemp, Warning, TEXT("Aiming at  %s"), *(aimDirection.ToString()));
 		}
+		else
+			UE_LOG(LogTemp, Warning, TEXT("%f No solution found"), GetWorld()->GetTimeSeconds());
 	}
 }
 
