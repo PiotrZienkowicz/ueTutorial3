@@ -1,4 +1,3 @@
-
 #include "BattleTank.h"
 #include "TankAimingComponent.h"
 
@@ -9,6 +8,10 @@ UTankAimingComponent::UTankAimingComponent()
 
 }
 
+void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* barrelToSet)
+{
+	barrel = barrelToSet;
+}
 
 void UTankAimingComponent::BeginPlay()
 {
@@ -22,8 +25,29 @@ void UTankAimingComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 
 }
 
-void UTankAimingComponent::AimAt(FVector hitLocation)
+void UTankAimingComponent::AimAt(FVector hitLocation, float lunchSpeed)
 {
-	UE_LOG(LogTemp, Warning, TEXT("%s aiming at: %s"), *(GetOwner()->GetName()), *(hitLocation.ToString()))
+	if (barrel)
+	{
+		FVector outLunchVelocity;
+		FVector startLocation = barrel->GetSocketLocation(FName("Projectile"));
+
+		if (UGameplayStatics::SuggestProjectileVelocity(
+			GetWorld(),
+			outLunchVelocity,
+			startLocation,
+			hitLocation,
+			lunchSpeed,
+			false,
+			0,
+			0,
+			ESuggestProjVelocityTraceOption::DoNotTrace
+		))
+		{
+			FVector aimDirection = outLunchVelocity.GetSafeNormal();
+			UE_LOG(LogTemp, Warning, TEXT("Aiming at  %s"), *(aimDirection.ToString()));
+		}
+	}
+	
 }
 

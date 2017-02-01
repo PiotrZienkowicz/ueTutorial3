@@ -16,7 +16,7 @@ void ATankAIController::Tick(float DeltaSeconds)
 	ATank* playerTank = GetPlayerTank();
 	if (playerTank != nullptr)
 	{
-		GetControlledTank()->FindComponentByClass<UTankAimingComponent>()->AimAt(playerTank->GetActorLocation());
+		GetControlledTank()->AimAt(playerTank->GetActorLocation());
 	}
 }
 

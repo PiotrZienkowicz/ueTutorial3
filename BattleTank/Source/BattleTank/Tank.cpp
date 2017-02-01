@@ -1,8 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #include "BattleTank.h"
 #include "Tank.h"
 
+void ATank::SetBarrelReference(UStaticMeshComponent* barrelToSet)
+{
+	TankAimingComponent->SetBarrelReference(barrelToSet);
+}
 
 
 
@@ -33,5 +35,10 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
 	Super::SetupPlayerInputComponent(InputComponent);
 
+}
+
+void ATank::AimAt(FVector hitLocation)
+{
+	TankAimingComponent->AimAt(hitLocation, lunchSpeed);
 }
 
