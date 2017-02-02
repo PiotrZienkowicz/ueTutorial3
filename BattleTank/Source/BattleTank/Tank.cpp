@@ -41,3 +41,9 @@ void ATank::AimAt(FVector hitLocation)
 	TankAimingComponent->AimAt(hitLocation, lunchSpeed);
 }
 
+void ATank::Fire()
+{
+	UE_LOG(LogTemp, Warning, TEXT("%f - Fire"), GetWorld()->GetTimeSeconds());
+
+}
+

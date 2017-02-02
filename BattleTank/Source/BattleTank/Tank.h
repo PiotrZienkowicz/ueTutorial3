@@ -16,9 +16,13 @@ class BATTLETANK_API ATank : public APawn
 
 public:
 	void AimAt(FVector hitLocation);
+	
 
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
+
+	UFUNCTION(BlueprintCallable, Category = Gameplay)
+	void Fire();
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel* barrelToSet);
