@@ -14,7 +14,7 @@ public:
 	void Rotate(float speed);
 	
 private:
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		float maxDegreePerSecond = 5.f;
 	
 };

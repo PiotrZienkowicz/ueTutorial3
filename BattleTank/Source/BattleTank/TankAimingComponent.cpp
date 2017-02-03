@@ -20,6 +20,8 @@ void UTankAimingComponent::SetTurretReference(UTankTurret* turretToSet)
 
 void UTankAimingComponent::AimAt(FVector hitLocation, float lunchSpeed)
 {
+	UE_LOG(LogTemp, Warning, TEXT("Test"));
+
 	if (barrel && turret)
 	{
 		FVector outLunchVelocity;

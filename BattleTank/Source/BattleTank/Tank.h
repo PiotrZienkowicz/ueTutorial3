@@ -24,7 +24,9 @@ public:
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
-	
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	TSubclassOf<AProjectile> projectileBlueprint = nullptr;
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel* barrelToSet);
@@ -32,17 +34,20 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* turretToSet);
 
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float lunchSpeed = 100.f;
 
-	UPROPERTY(EditAnywhere, Category = Setup)
-	TSubclassOf<AProjectile> projectileBlueprint = nullptr;
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float reloadTimeInSeconds = 3.0f;
+
+
+	
+
 
 private:
 	ATank();
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 	UTankBarrel * barrel = nullptr;
 
-	float reloadTimeInSeconds = 3.0f;
 	double lastFireTime = 0;
 };
