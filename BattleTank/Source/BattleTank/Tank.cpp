@@ -19,18 +19,8 @@ void ATank::SetTurretReference(UTankTurret* turretToSet)
 
 ATank::ATank()
 {
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming component"));
-}
-
-void ATank::BeginPlay()
-{
-	Super::BeginPlay();
-}
-
-void ATank::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 }
 
 void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
@@ -48,12 +38,13 @@ void ATank::Fire()
 {
 	if (barrel)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("%f - Fire"), GetWorld()->GetTimeSeconds());
-		GetWorld()->SpawnActor<AProjectile>(
+		auto projectile = GetWorld()->SpawnActor<AProjectile>(
 			projectileBlueprint, 
 			barrel->GetSocketLocation(FName("Projectile")),
 			barrel->GetSocketRotation(FName("Projectile"))
 			);
+
+		projectile->LunchProjectile(lunchSpeed);
 	}
 
 }

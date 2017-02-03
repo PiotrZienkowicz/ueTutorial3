@@ -39,8 +39,6 @@ protected:
 
 private:
 	ATank();
-	virtual void BeginPlay() override;
-	virtual void Tick( float DeltaSeconds ) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 	UTankBarrel * barrel = nullptr;
 };
