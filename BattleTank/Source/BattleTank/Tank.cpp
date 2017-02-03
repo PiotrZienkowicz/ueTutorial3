@@ -49,8 +49,11 @@ void ATank::Fire()
 	if (barrel)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("%f - Fire"), GetWorld()->GetTimeSeconds());
-		FVector location = barrel->GetSocketLocation(FName("Projectile"));
-		GetWorld()->SpawnActor<AProjectile>(projectileBlueprint, location, FRotator(0, 0, 0));
+		GetWorld()->SpawnActor<AProjectile>(
+			projectileBlueprint, 
+			barrel->GetSocketLocation(FName("Projectile")),
+			barrel->GetSocketRotation(FName("Projectile"))
+			);
 	}
 
 }
