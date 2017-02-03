@@ -17,13 +17,14 @@ class BATTLETANK_API ATank : public APawn
 
 public:
 	void AimAt(FVector hitLocation);
-	
+
+	UFUNCTION(BlueprintCallable, Category = Gameplay)
+	void Fire();
 
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
-	UFUNCTION(BlueprintCallable, Category = Gameplay)
-	void Fire();
+	
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel* barrelToSet);
@@ -41,4 +42,7 @@ private:
 	ATank();
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 	UTankBarrel * barrel = nullptr;
+
+	float reloadTimeInSeconds = 3.0f;
+	double lastFireTime = 0;
 };
