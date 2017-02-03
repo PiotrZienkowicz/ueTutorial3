@@ -3,16 +3,16 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "Pojectile.generated.h"
+#include "Projectile.generated.h"
 
 UCLASS()
-class BATTLETANK_API APojectile : public AActor
+class BATTLETANK_API AProjectile : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	APojectile();
+	AProjectile();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

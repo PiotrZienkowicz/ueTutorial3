@@ -2,10 +2,13 @@
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
+#include "Projectile.h"
 #include "Tank.h"
+
 
 void ATank::SetBarrelReference(UTankBarrel* barrelToSet)
 {
+	barrel = barrelToSet;
 	TankAimingComponent->SetBarrelReference(barrelToSet);
 }
 
@@ -25,9 +28,9 @@ void ATank::BeginPlay()
 	Super::BeginPlay();
 }
 
-void ATank::Tick( float DeltaTime )
+void ATank::Tick(float DeltaTime)
 {
-	Super::Tick( DeltaTime );
+	Super::Tick(DeltaTime);
 }
 
 void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
@@ -43,7 +46,12 @@ void ATank::AimAt(FVector hitLocation)
 
 void ATank::Fire()
 {
-	UE_LOG(LogTemp, Warning, TEXT("%f - Fire"), GetWorld()->GetTimeSeconds());
+	if (barrel)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%f - Fire"), GetWorld()->GetTimeSeconds());
+		FVector location = barrel->GetSocketLocation(FName("Projectile"));
+		GetWorld()->SpawnActor<AProjectile>(projectileBlueprint, location, FRotator(0, 0, 0));
+	}
 
 }
 
